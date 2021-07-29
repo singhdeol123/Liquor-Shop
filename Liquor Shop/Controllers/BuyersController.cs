@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Liquor_Shop.Data;
 using Liquor_Shop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Liquor_Shop.Controllers
 {
+    [Authorize]
     public class BuyersController : Controller
     {
         private readonly Liquor_ShopContext _context;
@@ -48,7 +50,7 @@ namespace Liquor_Shop.Controllers
         // GET: Buyers/Create
         public IActionResult Create()
         {
-            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Id");
+            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Seller_Name");
             return View();
         }
 
@@ -65,7 +67,7 @@ namespace Liquor_Shop.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Id", buyer.SellerID);
+            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Seller_Name", buyer.SellerID);
             return View(buyer);
         }
 
@@ -82,7 +84,7 @@ namespace Liquor_Shop.Controllers
             {
                 return NotFound();
             }
-            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Id", buyer.SellerID);
+            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Seller_Name", buyer.SellerID);
             return View(buyer);
         }
 
@@ -118,7 +120,7 @@ namespace Liquor_Shop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Id", buyer.SellerID);
+            ViewData["SellerID"] = new SelectList(_context.Seller, "Id", "Seller_Name", buyer.SellerID);
             return View(buyer);
         }
 

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Liquor_Shop.Data;
 using Liquor_Shop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Liquor_Shop.Controllers
 {
+    [Authorize]
     public class SellersController : Controller
     {
         private readonly Liquor_ShopContext _context;
